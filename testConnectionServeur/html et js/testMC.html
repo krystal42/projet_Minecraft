@@ -1,0 +1,43 @@
+
+<!DOCTYPE html>
+	<html>
+	<head>
+	<meta charset="utf-8"/>
+	<title>TEST Connectivité</title>
+	</head>
+		<body>
+			
+			<h1 align="center">TEST Connectivité serveur/nodeMcu</h1>
+			
+			<script type="text/javascript">
+				/* changement de la valeur de la led RGB à chaque actualisation de la page */  
+				
+				//selection d'un element pour y assigner une fonction
+				var page = document.getElementsByTagName("html");
+				
+				function clickMousse(event){
+					//valeur factice pour tester le changement d'etat de la led RGB
+					function randomInt(min, max){
+						var min = 0;
+						var max = 2;
+						return Math.floor(Math.random()* max + min);
+					}
+									  var x = randomInt();
+									  var y = randomInt();
+				  					  var z = randomInt();
+				
+				//requete xhr d'envoie des valeurs au NodeMcu
+				var xhr = new XMLHttpRequest();
+				xhr.open('POST', "http://192.168.0.24/urlColor?r=" + x  + "&v=" + y + "&b=" + z);//adresse ip du node Mcu a modifié selon les equipement;
+				xhr.send();
+				
+			   };
+				
+				//gestionnaire d'evenement
+				page.addEventListener("click", clickMousse());
+				
+				
+			</script>
+		</body>
+		
+	</html>
